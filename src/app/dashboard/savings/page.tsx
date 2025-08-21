@@ -4,10 +4,11 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { PiggyBank, TrendingUp, TrendingDown, PlusCircle } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
 export default function SavingsPage() {
-  const { currentBalance, monthlyGoal, transactions } = userSavingsData;
-  const progress = (currentBalance / monthlyGoal) * 100;
+  const { balance, monthlyGoal, transactions } = userSavingsData;
+  const progress = (balance.compulsory / monthlyGoal) * 100;
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-LS', {
@@ -26,22 +27,48 @@ export default function SavingsPage() {
 
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <Card className="lg:col-span-1 shadow-lg transform hover:scale-105 transition-transform duration-300">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Current Savings</CardTitle>
-          <PiggyBank className="h-5 w-5 text-muted-foreground" />
-        </CardHeader>
-        <CardContent>
-          <div className="text-4xl font-bold text-primary">{formatCurrency(currentBalance)}</div>
-          <p className="text-xs text-muted-foreground pt-2">
-            Your total saved amount.
-          </p>
-        </CardContent>
-      </Card>
+        <Card className="lg:col-span-1 shadow-lg transform hover:scale-105 transition-transform duration-300">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Savings</CardTitle>
+            <PiggyBank className="h-5 w-5 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+            <div className="text-4xl font-bold text-primary">{formatCurrency(balance.total)}</div>
+            <p className="text-xs text-muted-foreground pt-2">
+                Your total saved amount.
+            </p>
+            </CardContent>
+        </Card>
+
+        <Card className="lg:col-span-1 shadow-lg transform hover:scale-105 transition-transform duration-300">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Compulsory Savings</CardTitle>
+            <PiggyBank className="h-5 w-5 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+            <div className="text-4xl font-bold">{formatCurrency(balance.compulsory)}</div>
+            <p className="text-xs text-muted-foreground pt-2">
+                Mandatory monthly savings.
+            </p>
+            </CardContent>
+        </Card>
+
+        <Card className="lg:col-span-1 shadow-lg transform hover:scale-105 transition-transform duration-300">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Voluntary Savings</CardTitle>
+            <PiggyBank className="h-5 w-5 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+            <div className="text-4xl font-bold">{formatCurrency(balance.voluntary)}</div>
+            <p className="text-xs text-muted-foreground pt-2">
+                Your extra savings.
+            </p>
+            </CardContent>
+        </Card>
       
-      <Card className="lg:col-span-2 shadow-lg">
+      <Card className="lg:col-span-3 shadow-lg">
         <CardHeader>
-          <CardTitle>Savings Goal</CardTitle>
+          <CardTitle>Compulsory Savings Goal</CardTitle>
           <CardDescription>You've saved {progress.toFixed(0)}% of your {formatCurrency(monthlyGoal)} goal.</CardDescription>
         </CardHeader>
         <CardContent>
@@ -61,7 +88,7 @@ export default function SavingsPage() {
             </div>
             <Button size="sm">
                 <PlusCircle className="mr-2 h-4 w-4" />
-                Add Funds
+                Add Voluntary Funds
             </Button>
         </CardHeader>
         <CardContent>
@@ -71,6 +98,7 @@ export default function SavingsPage() {
                 <TableRow>
                     <TableHead>Date</TableHead>
                     <TableHead>Description</TableHead>
+                    <TableHead>Category</TableHead>
                     <TableHead className="text-right">Amount</TableHead>
                 </TableRow>
                 </TableHeader>
@@ -79,6 +107,11 @@ export default function SavingsPage() {
                     <TableRow key={transaction.id}>
                     <TableCell className="font-medium">{formatDate(transaction.date)}</TableCell>
                     <TableCell>{transaction.description}</TableCell>
+                    <TableCell>
+                      <Badge variant={transaction.category === 'compulsory' ? 'secondary' : 'outline'} className="capitalize">
+                        {transaction.category}
+                      </Badge>
+                    </TableCell>
                     <TableCell className={`text-right font-semibold ${transaction.type === 'deposit' ? 'text-emerald-600' : 'text-destructive'}`}>
                         <div className="flex items-center justify-end">
                             {transaction.type === 'deposit' ? <TrendingUp className="mr-1 h-4 w-4" /> : <TrendingDown className="mr-1 h-4 w-4" />}
