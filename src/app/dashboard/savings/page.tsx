@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { PiggyBank, TrendingUp, TrendingDown, PlusCircle, Briefcase } from 'lucide-react';
+import { PiggyBank, TrendingUp, TrendingDown, PlusCircle, Briefcase, ShieldAlert } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
 export default function SavingsPage() {
@@ -78,6 +78,19 @@ export default function SavingsPage() {
             </p>
             </CardContent>
         </Card>
+
+         <Card className="lg:col-span-1 shadow-lg transform hover:scale-105 transition-transform duration-300">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Emergency Savings</CardTitle>
+            <ShieldAlert className="h-5 w-5 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+            <div className="text-4xl font-bold">{formatCurrency(balance.emergency)}</div>
+            <p className="text-xs text-muted-foreground pt-2">
+                Compulsory emergency fund.
+            </p>
+            </CardContent>
+        </Card>
       
       <Card className="lg:col-span-4 shadow-lg">
         <CardHeader>
@@ -121,7 +134,7 @@ export default function SavingsPage() {
                     <TableCell className="font-medium">{formatDate(transaction.date)}</TableCell>
                     <TableCell>{transaction.description}</TableCell>
                     <TableCell>
-                      <Badge variant={transaction.category === 'compulsory' ? 'secondary' : (transaction.category === 'pension' ? 'default' : 'outline')} className={`capitalize ${transaction.category === 'pension' && 'bg-blue-600 hover:bg-blue-600/90'}`}>
+                      <Badge variant={transaction.category === 'compulsory' ? 'secondary' : (transaction.category === 'pension' ? 'default' : (transaction.category === 'emergency' ? 'destructive' : 'outline'))} className={`capitalize ${transaction.category === 'pension' && 'bg-blue-600 hover:bg-blue-600/90'}`}>
                         {transaction.category}
                       </Badge>
                     </TableCell>

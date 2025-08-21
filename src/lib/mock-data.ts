@@ -23,7 +23,7 @@ export type SavingsTransaction = {
   description: string;
   amount: number;
   type: 'deposit' | 'withdrawal';
-  category: 'compulsory' | 'voluntary' | 'pension';
+  category: 'compulsory' | 'voluntary' | 'pension' | 'emergency';
 };
 
 export type UserSavings = {
@@ -32,6 +32,7 @@ export type UserSavings = {
     compulsory: number;
     voluntary: number;
     pension: number;
+    emergency: number;
   };
   monthlyGoal: number;
   transactions: SavingsTransaction[];
@@ -56,18 +57,21 @@ export const allLoansData: AdminLoanView[] = [
 
 export const userSavingsData: UserSavings = {
   balance: {
-    total: 9200.50,
+    total: 10700.50,
     compulsory: 5000.00,
     voluntary: 2200.50,
     pension: 2000.00,
+    emergency: 1500.00,
   },
   monthlyGoal: 10000,
   transactions: [
     { id: 'TRN-001', date: new Date(new Date().setDate(new Date().getDate() - 2)).toISOString(), description: 'Monthly Savings', amount: 2500, type: 'deposit', category: 'compulsory' },
     { id: 'TRN-005', date: new Date(new Date().setDate(new Date().getDate() - 5)).toISOString(), description: 'Pension Contribution', amount: 1000, type: 'deposit', category: 'pension' },
+    { id: 'TRN-007', date: new Date(new Date().setDate(new Date().getDate() - 7)).toISOString(), description: 'Emergency Fund', amount: 750, type: 'deposit', category: 'emergency' },
     { id: 'TRN-002', date: new Date(new Date().setDate(new Date().getDate() - 10)).toISOString(), description: 'Emergency Withdrawal', amount: 500, type: 'withdrawal', category: 'voluntary' },
     { id: 'TRN-003', date: new Date(new Date().setDate(new Date().getDate() - 15)).toISOString(), description: 'Paycheck Deposit', amount: 2700.50, type: 'deposit', category: 'voluntary' },
     { id: 'TRN-004', date: new Date(new Date().setDate(new Date().getDate() - 20)).toISOString(), description: 'Monthly Savings', amount: 2500, type: 'deposit', category: 'compulsory' },
     { id: 'TRN-006', date: new Date(new Date().setDate(new Date().getDate() - 25)).toISOString(), description: 'Pension Contribution', amount: 1000, type: 'deposit', category: 'pension' },
+    { id: 'TRN-008', date: new Date(new Date().setDate(new Date().getDate() - 27)).toISOString(), description: 'Emergency Fund', amount: 750, type: 'deposit', category: 'emergency' },
   ],
 };
