@@ -151,7 +151,7 @@ export default function SavingsPage() {
           <CardDescription>A log of your recent savings activity.</CardDescription>
         </CardHeader>
         <CardContent>
-            <div className="flex justify-end mb-4">
+            <div className="flex justify-start mb-4">
                 <Button size="sm">
                     <PlusCircle className="mr-2 h-4 w-4" />
                     Add Voluntary Funds
