@@ -24,7 +24,7 @@ export type SavingsTransaction = {
   description: string;
   amount: number;
   type: 'deposit' | 'withdrawal';
-  category: 'compulsory' | 'voluntary' | 'pension' | 'emergency' | 'security' | 'group';
+  category: 'compulsory' | 'voluntary' | 'pension' | 'emergency' | 'security' | 'group' | 'capitalShare';
 };
 
 export type UserSavings = {
@@ -36,11 +36,13 @@ export type UserSavings = {
     emergency: number;
     security: number;
     group: number;
+    capitalShare: number;
   };
   monthlyGoal: number;
   emergencyContribution: number;
   securityContribution: number;
   groupContribution: number;
+  capitalShareContribution: number;
   transactions: SavingsTransaction[];
 };
 
@@ -63,19 +65,22 @@ export const allLoansData: AdminLoanView[] = [
 
 export const userSavingsData: UserSavings = {
   balance: {
-    total: 10520.50,
+    total: 11020.50,
     compulsory: 5000.00,
     voluntary: 2200.50,
     pension: 2000.00,
     emergency: 770.00,
     security: 50.00,
     group: 500.00,
+    capitalShare: 500.00,
   },
   monthlyGoal: 10000,
   emergencyContribution: 10,
   securityContribution: 50,
   groupContribution: 500,
+  capitalShareContribution: 500,
   transactions: [
+    { id: 'TRN-011', date: new Date(new Date().setDate(new Date().getDate() - 1)).toISOString(), description: 'New Member Capital Share', amount: 500, type: 'deposit', category: 'capitalShare' },
     { id: 'TRN-001', date: new Date(new Date().setDate(new Date().getDate() - 2)).toISOString(), description: 'Monthly Savings', amount: 2500, type: 'deposit', category: 'compulsory' },
     { id: 'TRN-010', date: new Date(new Date().setDate(new Date().getDate() - 2)).toISOString(), description: 'Group Contribution', amount: 500, type: 'deposit', category: 'group' },
     { id: 'TRN-009', date: new Date(new Date().setDate(new Date().getDate() - 3)).toISOString(), description: 'Security Contribution', amount: 50, type: 'deposit', category: 'security' },
