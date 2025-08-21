@@ -29,9 +29,6 @@ export default function Home() {
           </div>
         </CardContent>
       </Card>
-       <footer className="mt-8 text-center text-sm text-muted-foreground">
-        Built with Next.js and ShadCN UI.
-      </footer>
     </main>
   );
 }
