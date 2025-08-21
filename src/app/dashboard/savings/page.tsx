@@ -146,17 +146,17 @@ export default function SavingsPage() {
       </Card>
 
       <Card className="lg:col-span-4 shadow-lg">
-        <CardHeader className="flex flex-row items-center justify-between">
-          <div className="grid gap-1">
-            <CardTitle>Recent Transactions</CardTitle>
-            <CardDescription>A log of your recent savings activity.</CardDescription>
-          </div>
-          <Button size="sm" className="ml-auto gap-1">
-            <PlusCircle className="mr-2 h-4 w-4" />
-            Add Voluntary Funds
-          </Button>
+        <CardHeader>
+          <CardTitle>Recent Transactions</CardTitle>
+          <CardDescription>A log of your recent savings activity.</CardDescription>
         </CardHeader>
         <CardContent>
+            <div className="flex justify-end mb-4">
+                <Button size="sm">
+                    <PlusCircle className="mr-2 h-4 w-4" />
+                    Add Voluntary Funds
+                </Button>
+            </div>
            <div className="rounded-md border">
             <Table>
                 <TableHeader>
