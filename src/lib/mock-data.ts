@@ -16,6 +16,16 @@ export type AdminLoanView = {
   amount: number;
   outstandingBalance: number;
   status: 'Approved' | 'Rejected' | 'Pending';
+  savings: {
+    total: number;
+    compulsory: number;
+    voluntary: number;
+    pension: number;
+    emergency: number;
+    security: number;
+    group: number;
+    capitalShare: number;
+  };
 };
 
 export type SavingsTransaction = {
@@ -55,12 +65,54 @@ export const userLoanData: UserLoan = {
 };
 
 export const allLoansData: AdminLoanView[] = [
-  { id: 'LN-001', applicantName: 'Alice Johnson', amount: 15000, outstandingBalance: 12530.75, status: 'Approved' },
-  { id: 'LN-002', applicantName: 'Bob Williams', amount: 25000, outstandingBalance: 25000.00, status: 'Pending' },
-  { id: 'LN-003', applicantName: 'Charlie Brown', amount: 8000, outstandingBalance: 0, status: 'Rejected' },
-  { id: 'LN-004', applicantName: 'Diana Miller', amount: 50000, outstandingBalance: 45200.10, status: 'Approved' },
-  { id: 'LN-005', applicantName: 'Ethan Davis', amount: 12000, outstandingBalance: 12000.00, status: 'Pending' },
-  { id: 'LN-006', applicantName: 'Fiona Garcia', amount: 3000, outstandingBalance: 0.00, status: 'Approved' },
+  { 
+    id: 'LN-001', 
+    applicantName: 'Alice Johnson', 
+    amount: 15000, 
+    outstandingBalance: 12530.75, 
+    status: 'Approved',
+    savings: { total: 11020.50, compulsory: 5000, voluntary: 2200.50, pension: 2000, emergency: 770, security: 50, group: 500, capitalShare: 500 }
+  },
+  { 
+    id: 'LN-002', 
+    applicantName: 'Bob Williams', 
+    amount: 25000, 
+    outstandingBalance: 25000.00, 
+    status: 'Pending',
+    savings: { total: 8500, compulsory: 4000, voluntary: 1500, pension: 1500, emergency: 500, security: 250, group: 250, capitalShare: 500 }
+  },
+  { 
+    id: 'LN-003', 
+    applicantName: 'Charlie Brown', 
+    amount: 8000, 
+    outstandingBalance: 0, 
+    status: 'Rejected',
+    savings: { total: 2500, compulsory: 2000, voluntary: 0, pension: 0, emergency: 0, security: 0, group: 0, capitalShare: 500 }
+  },
+  { 
+    id: 'LN-004', 
+    applicantName: 'Diana Miller', 
+    amount: 50000, 
+    outstandingBalance: 45200.10, 
+    status: 'Approved',
+    savings: { total: 25000, compulsory: 10000, voluntary: 5000, pension: 5000, emergency: 2000, security: 1000, group: 1500, capitalShare: 500 }
+  },
+  { 
+    id: 'LN-005', 
+    applicantName: 'Ethan Davis', 
+    amount: 12000, 
+    outstandingBalance: 12000.00, 
+    status: 'Pending',
+    savings: { total: 5320, compulsory: 3000, voluntary: 1000, pension: 500, emergency: 320, security: 0, group: 0, capitalShare: 500 }
+  },
+  { 
+    id: 'LN-006', 
+    applicantName: 'Fiona Garcia', 
+    amount: 3000, 
+    outstandingBalance: 0.00, 
+    status: 'Approved',
+    savings: { total: 15000, compulsory: 8000, voluntary: 4000, pension: 1000, emergency: 500, security: 500, group: 500, capitalShare: 500 }
+  },
 ];
 
 export const userSavingsData: UserSavings = {
