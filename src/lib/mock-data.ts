@@ -36,6 +36,7 @@ export type UserSavings = {
     emergency: number;
   };
   monthlyGoal: number;
+  emergencyContribution: number;
   transactions: SavingsTransaction[];
 };
 
@@ -65,6 +66,7 @@ export const userSavingsData: UserSavings = {
     emergency: 770.00,
   },
   monthlyGoal: 10000,
+  emergencyContribution: 10,
   transactions: [
     { id: 'TRN-001', date: new Date(new Date().setDate(new Date().getDate() - 2)).toISOString(), description: 'Monthly Savings', amount: 2500, type: 'deposit', category: 'compulsory' },
     { id: 'TRN-005', date: new Date(new Date().setDate(new Date().getDate() - 5)).toISOString(), description: 'Pension Contribution', amount: 1000, type: 'deposit', category: 'pension' },

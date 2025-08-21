@@ -7,7 +7,7 @@ import { PiggyBank, TrendingUp, TrendingDown, PlusCircle, Briefcase, ShieldAlert
 import { Badge } from '@/components/ui/badge';
 
 export default function SavingsPage() {
-  const { balance, monthlyGoal, transactions } = userSavingsData;
+  const { balance, monthlyGoal, transactions, emergencyContribution } = userSavingsData;
   const progress = (balance.compulsory / monthlyGoal) * 100;
 
   const formatCurrency = (amount: number) => {
@@ -87,7 +87,7 @@ export default function SavingsPage() {
             <CardContent>
             <div className="text-4xl font-bold">{formatCurrency(balance.emergency)}</div>
             <p className="text-xs text-muted-foreground pt-2">
-                Compulsory emergency fund.
+                Compulsory {formatCurrency(emergencyContribution)} per month.
             </p>
             </CardContent>
         </Card>
