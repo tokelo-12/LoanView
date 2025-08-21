@@ -9,9 +9,9 @@ export default function UserDashboardPage() {
   const { outstandingBalance, applications } = userLoanData;
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-LS', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'LSL',
     }).format(amount);
   };
 

@@ -18,13 +18,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { DollarSign, FileText } from "lucide-react";
+import { FileText } from "lucide-react";
 
 const formSchema = z.object({
   loanType: z.enum(["short-term", "long-term", "emergency"], {
     required_error: "Please select a loan type.",
   }),
-  amount: z.coerce.number().positive({ message: "Please enter a positive amount." }).min(100, { message: "Minimum loan amount is $100." }),
+  amount: z.coerce.number().positive({ message: "Please enter a positive amount." }).min(100, { message: "Minimum loan amount is L100." }),
 });
 
 export function LoanApplicationForm() {
@@ -42,7 +42,7 @@ export function LoanApplicationForm() {
     console.log("Loan Application Submitted:", values);
     toast({
       title: "Application Submitted!",
-      description: `Your application for a ${values.loanType} loan of $${values.amount} has been received.`,
+      description: `Your application for a ${values.loanType} loan of L${values.amount} has been received.`,
     });
     router.push("/dashboard");
   }
@@ -93,13 +93,13 @@ export function LoanApplicationForm() {
                 <FormItem>
                   <FormLabel>Loan Amount</FormLabel>
                   <div className="relative">
-                    <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                     <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">L</span>
                     <FormControl>
                       <Input type="number" placeholder="e.g. 5000" {...field} className="pl-10" />
                     </FormControl>
                   </div>
                    <FormDescription>
-                    Specify the amount you wish to borrow. Minimum is $100.
+                    Specify the amount you wish to borrow. Minimum is L100.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
