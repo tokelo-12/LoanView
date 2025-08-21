@@ -21,10 +21,10 @@ export default function Home() {
         <CardContent>
           <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
             <Button asChild className="flex-1" size="lg">
-              <Link href="/login">User Portal</Link>
+              <Link href="/dashboard">User Portal</Link>
             </Button>
             <Button asChild className="flex-1" variant="outline" size="lg">
-              <Link href="/admin/login">Admin Portal</Link>
+              <Link href="/admin/dashboard">Admin Portal</Link>
             </Button>
           </div>
         </CardContent>
