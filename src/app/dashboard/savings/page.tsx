@@ -1,0 +1,97 @@
+import { userSavingsData } from '@/lib/mock-data';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { PiggyBank, TrendingUp, TrendingDown, PlusCircle } from 'lucide-react';
+
+export default function SavingsPage() {
+  const { currentBalance, monthlyGoal, transactions } = userSavingsData;
+  const progress = (currentBalance / monthlyGoal) * 100;
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-LS', {
+      style: 'currency',
+      currency: 'LSL',
+    }).format(amount);
+  };
+  
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-LS', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    });
+  }
+
+  return (
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <Card className="lg:col-span-1 shadow-lg transform hover:scale-105 transition-transform duration-300">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">Current Savings</CardTitle>
+          <PiggyBank className="h-5 w-5 text-muted-foreground" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-4xl font-bold text-primary">{formatCurrency(currentBalance)}</div>
+          <p className="text-xs text-muted-foreground pt-2">
+            Your total saved amount.
+          </p>
+        </CardContent>
+      </Card>
+      
+      <Card className="lg:col-span-2 shadow-lg">
+        <CardHeader>
+          <CardTitle>Savings Goal</CardTitle>
+          <CardDescription>You've saved {progress.toFixed(0)}% of your {formatCurrency(monthlyGoal)} goal.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Progress value={progress} className="h-4" />
+          <div className="flex justify-between mt-2 text-xs text-muted-foreground">
+            <span>{formatCurrency(0)}</span>
+            <span>{formatCurrency(monthlyGoal)}</span>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="lg:col-span-3 shadow-lg">
+        <CardHeader className="flex flex-row items-center justify-between">
+            <div>
+                <CardTitle>Recent Transactions</CardTitle>
+                <CardDescription>A log of your recent savings activity.</CardDescription>
+            </div>
+            <Button size="sm">
+                <PlusCircle className="mr-2 h-4 w-4" />
+                Add Funds
+            </Button>
+        </CardHeader>
+        <CardContent>
+           <div className="rounded-md border">
+            <Table>
+                <TableHeader>
+                <TableRow>
+                    <TableHead>Date</TableHead>
+                    <TableHead>Description</TableHead>
+                    <TableHead className="text-right">Amount</TableHead>
+                </TableRow>
+                </TableHeader>
+                <TableBody>
+                {transactions.map((transaction) => (
+                    <TableRow key={transaction.id}>
+                    <TableCell className="font-medium">{formatDate(transaction.date)}</TableCell>
+                    <TableCell>{transaction.description}</TableCell>
+                    <TableCell className={`text-right font-semibold ${transaction.type === 'deposit' ? 'text-emerald-600' : 'text-destructive'}`}>
+                        <div className="flex items-center justify-end">
+                            {transaction.type === 'deposit' ? <TrendingUp className="mr-1 h-4 w-4" /> : <TrendingDown className="mr-1 h-4 w-4" />}
+                            {formatCurrency(transaction.amount)}
+                        </div>
+                    </TableCell>
+                    </TableRow>
+                ))}
+                </TableBody>
+            </Table>
+            </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}

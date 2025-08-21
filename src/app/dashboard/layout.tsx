@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Icons } from '@/components/icons';
-import { LogOut, User } from 'lucide-react';
+import { LogOut, User, PiggyBank, LayoutDashboard } from 'lucide-react';
+import { NavLink } from '@/components/nav-link';
 
 export default function DashboardLayout({
   children,
@@ -16,6 +17,16 @@ export default function DashboardLayout({
             <Icons.logo className="h-8 w-8 text-primary" />
             <span className="text-xl font-bold text-foreground sr-only sm:not-sr-only">LoanView</span>
           </Link>
+          <div className="hidden sm:flex items-center gap-4">
+            <NavLink href="/dashboard">
+              <LayoutDashboard />
+              Dashboard
+            </NavLink>
+            <NavLink href="/dashboard/savings">
+              <PiggyBank />
+              Savings
+            </NavLink>
+          </div>
           <div className="flex items-center gap-4">
              <div className="flex items-center gap-2 text-sm font-medium text-foreground">
               <User className="h-5 w-5" />

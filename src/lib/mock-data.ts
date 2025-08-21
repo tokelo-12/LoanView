@@ -17,6 +17,20 @@ export type AdminLoanView = {
   status: 'Approved' | 'Rejected' | 'Pending';
 };
 
+export type SavingsTransaction = {
+  id: string;
+  date: string;
+  description: string;
+  amount: number;
+  type: 'deposit' | 'withdrawal';
+};
+
+export type UserSavings = {
+  currentBalance: number;
+  monthlyGoal: number;
+  transactions: SavingsTransaction[];
+};
+
 export const userLoanData: UserLoan = {
   outstandingBalance: 12530.75,
   applications: [
@@ -33,3 +47,13 @@ export const allLoansData: AdminLoanView[] = [
   { id: 'LN-005', applicantName: 'Ethan Davis', amount: 12000, outstandingBalance: 12000.00, status: 'Pending' },
   { id: 'LN-006', applicantName: 'Fiona Garcia', amount: 3000, outstandingBalance: 0.00, status: 'Approved' },
 ];
+
+export const userSavingsData: UserSavings = {
+  currentBalance: 5200.50,
+  monthlyGoal: 10000,
+  transactions: [
+    { id: 'TRN-001', date: new Date(new Date().setDate(new Date().getDate() - 2)).toISOString(), description: 'Monthly Deposit', amount: 2500, type: 'deposit' },
+    { id: 'TRN-002', date: new Date(new Date().setDate(new Date().getDate() - 10)).toISOString(), description: 'Emergency Withdrawal', amount: 500, type: 'withdrawal' },
+    { id: 'TRN-003', date: new Date(new Date().setDate(new Date().getDate() - 15)).toISOString(), description: 'Paycheck Deposit', amount: 3200.50, type: 'deposit' },
+  ],
+};
